@@ -71,8 +71,8 @@ if __name__ == "__main__":
     total_execution_time = total_end_time - total_start_time
     
     # Print the results
-    print(f"Solution x: {x}")
-    print(f"Timings per iteration: {timings}")
+    print(f"Solution x: {x}\n")
+    print(f"Timings per iteration: {timings}\n")
+    print(f"Total iterations: {iterations}")
     print(f"Total MPI_ALLreduce equivalent operations: {mpi_allreduce_count}")
     print(f"Total execution time: {total_execution_time:.6f} seconds")
-    print(f"Total iterations: {iterations}\n")
