@@ -18,10 +18,12 @@ def IGS_GMRES(A, b, x0, max_iter, tol):
     V[:, 0] = r0 / beta # Normalized r0
     
     timings = []
+    iterations = 0
     mpi_allreduce_count = 0
     
     for k in range(max_iter):
         start_time = time.time()
+        iterations += 1
         
         # Arnoldi process
         w = A @ V[:, k]
@@ -46,12 +48,12 @@ def IGS_GMRES(A, b, x0, max_iter, tol):
         if np.linalg.norm(b - A @ x) / np.linalg.norm(b) < tol:
             break
     
-    return x, timings, mpi_allreduce_count
+    return x, timings, mpi_allreduce_count, iterations
 
 # Main function
 if __name__ == "__main__":
     # Read the sparse symmetric matrix from the file
-    matrix_file = '/Users/anthony/Documents/Y3Sum/cse398/hw2/bcsstk26.mtx'
+    matrix_file = './bcsstk26.mtx'
     A = read_matrix(matrix_file)
     
     # Define the right-hand side vector and initial guess
@@ -66,7 +68,7 @@ if __name__ == "__main__":
     total_start_time = time.time()
     
     # Solve the linear system using IGS-GMRES
-    x, timings, mpi_allreduce_count = IGS_GMRES(A, b, x0, max_iter, tol)
+    x, timings, mpi_allreduce_count, iterations = IGS_GMRES(A, b, x0, max_iter, tol)
     
     total_end_time = time.time()
     total_execution_time = total_end_time - total_start_time
@@ -76,3 +78,4 @@ if __name__ == "__main__":
     print(f"Timings per iteration: {timings}")
     print(f"Total MPI_ALLreduce equivalent operations: {mpi_allreduce_count}")
     print(f"Total execution time: {total_execution_time:.6f} seconds")
+    print(f"Total iterations: {iterations}\n")
