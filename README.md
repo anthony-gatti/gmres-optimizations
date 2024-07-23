@@ -32,8 +32,8 @@ To set up the project and run the implementations, follow these steps:
 The repository contains three scripts for the GMRES implementations and a comparison script:
 
 1. **IGS-GMRES with 2 Synchronizations:** `igs_gmres.py`
-2. **Low-Synchronization MGS-GMRES with 1 Synchronization:** `ls_mgs_gmres.py`
-3. **Original MGS-GMRES by Saad and Schultz:** `original_mgs_gmres.py`
+2. **Low-Synchronization MGS-GMRES with 1 Synchronization:** `mgs_gmres_1sync.py`
+3. **Original MGS-GMRES by Saad and Schultz:** `mgs_gmres_ss.py`
 
 To compare the performance of the three implementations, run the comparison script:
 ```bash
